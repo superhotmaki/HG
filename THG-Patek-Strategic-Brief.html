@@ -1201,12 +1201,24 @@
             </div>
           </div>
 
+          <!-- Panel 4: Memento -->
+          <div class="cs-panel">
+            <div class="cs-content">
+              <div class="cs-brand">Memento / Malaysia</div>
+              <h1>Crafting Perfect Moments</h1>
+              <h2>Time is transformed.</h2>
+              <p>We believe that jewellery is not just an accessory; it's a reflection of life's milestones and a testament to enduring bonds. Through "Craft Perfect Moments", we help you celebrate these moments with jewellery that is beautifully crafted, uniquely yours, and designed to be treasured for generations to come.</p>
+            </div>
+            <div class="cs-image"><span>Visual coming</span></div>
+          </div>
+
         </div><!-- /cs-track -->
       </div><!-- /carousel-wrapper -->
       <div class="cs-nav">
         <button class="cs-arrow" id="csPrev" disabled aria-label="Previous">←</button>
         <div class="cs-dots" id="csDots">
           <div class="cs-dot active"></div>
+          <div class="cs-dot"></div>
           <div class="cs-dot"></div>
           <div class="cs-dot"></div>
         </div>
@@ -1411,7 +1423,7 @@ slides.forEach(s => obs.observe(s));
 
 // ── Carousel ──
 let csIndex = 0;
-const CS_TOTAL = 3;
+const CS_TOTAL = 4;
 const csPanels = document.querySelectorAll('.cs-panel');
 
 function activatePanel(index) {
