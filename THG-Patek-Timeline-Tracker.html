@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Hour Glass × Patek Philippe — Project Timeline</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            background: #0a0a0a;
+            color: #e0e0e0;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        body {
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            border-bottom: 1px solid #222;
+            padding-bottom: 30px;
+            margin-bottom: 40px;
+        }
+
+        .title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: #888888;
+            font-weight: 400;
+        }
+
+        /* Counter Cards */
+        .counters {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .counter-card {
+            border: 1px solid #222;
+            padding: 20px;
+            background: transparent;
+        }
+
+        .counter-label {
+            font-size: 12px;
+            color: #888888;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .counter-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            font-weight: 700;
+            color: #c9a84c;
+            margin-bottom: 4px;
+        }
+
+        .counter-text {
+            font-size: 13px;
+            color: #e0e0e0;
+        }
+
+        /* Main Grid Layout */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        /* Timeline Section */
+        .timeline-section {
+            border-bottom: 1px solid #222;
+            padding-bottom: 40px;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: #e0e0e0;
+        }
+
+        .timeline-phases {
+            margin-bottom: 40px;
+        }
+
+        .phase {
+            margin-bottom: 28px;
+        }
+
+        .phase-header {
+            display: flex;
+            align-items: baseline;
+            margin-bottom: 12px;
+            justify-content: space-between;
+        }
+
+        .phase-name {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: #e0e0e0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .phase-dates {
+            font-size: 12px;
+            color: #888888;
+        }
+
+        .phase-bar-container {
+            position: relative;
+            height: 40px;
+            background: #111;
+            border: 1px solid #222;
+        }
+
+        .phase-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #c9a84c 0%, #a68a3a 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            font-size: 11px;
+            color: #0a0a0a;
+            font-weight: 600;
+        }
+
+        .phase-bar.completed {
+            opacity: 0.6;
+        }
+
+        .phase-bar.in-progress {
+            animation: pulse-gold 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-gold {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        /* Milestones */
+        .milestones {
+            margin-bottom: 40px;
+        }
+
+        .milestone {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 16px;
+            padding: 12px;
+            border-left: 2px solid #222;
+            transition: border-color 0.2s;
+        }
+
+        .milestone.completed {
+            border-left-color: #c9a84c;
+            background: rgba(201, 168, 76, 0.03);
+        }
+
+        .milestone.key-gate {
+            border-left-color: #c9a84c;
+            background: rgba(201, 168, 76, 0.08);
+        }
+
+        .milestone-marker {
+            width: 16px;
+            height: 16px;
+            border-radius: 0;
+            border: 2px solid #888888;
+            margin-right: 12px;
+            margin-top: 2px;
+            flex-shrink: 0;
+            background: transparent;
+        }
+
+        .milestone.completed .milestone-marker {
+            border-color: #c9a84c;
+            background: #c9a84c;
+        }
+
+        .milestone.key-gate .milestone-marker {
+            border-color: #c9a84c;
+            background: transparent;
+            box-shadow: inset 0 0 0 3px #c9a84c;
+        }
+
+        .milestone-content {
+            flex: 1;
+        }
+
+        .milestone-date {
+            font-size: 12px;
+            font-weight: 600;
+            color: #c9a84c;
+            margin-bottom: 2px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .milestone-text {
+            font-size: 13px;
+            color: #e0e0e0;
+        }
+
+        .key-gate-label {
+            display: inline-block;
+            font-size: 10px;
+            background: #c9a84c;
+            color: #0a0a0a;
+            padding: 2px 6px;
+            margin-top: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        /* Action Items */
+        .action-items {
+            margin-bottom: 40px;
+        }
+
+        .action-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 16px;
+            padding: 12px;
+            border-left: 2px solid #222;
+            transition: all 0.2s;
+        }
+
+        .action-item.checked {
+            border-left-color: #c9a84c;
+            background: rgba(201, 168, 76, 0.03);
+        }
+
+        .action-item.due-today {
+            border-left-color: #d9534f;
+            background: rgba(217, 83, 79, 0.05);
+        }
+
+        .action-checkbox {
+            width: 18px;
+            height: 18px;
+            border: 2px solid #888888;
+            margin-right: 12px;
+            margin-top: 1px;
+            flex-shrink: 0;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .action-checkbox:hover {
+            border-color: #c9a84c;
+        }
+
+        .action-item.checked .action-checkbox {
+            border-color: #c9a84c;
+            background: #c9a84c;
+        }
+
+        .action-content {
+            flex: 1;
+        }
+
+        .action-text {
+            font-size: 13px;
+            color: #e0e0e0;
+            margin-bottom: 6px;
+        }
+
+        .action-item.checked .action-text {
+            color: #888888;
+            text-decoration: line-through;
+        }
+
+        .action-meta {
+            display: flex;
+            gap: 16px;
+            font-size: 11px;
+            color: #888888;
+        }
+
+        .action-owner {
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .action-due {
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .action-due.today {
+            color: #d9534f;
+            font-weight: 600;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            border-left: 1px solid #222;
+            padding-left: 20px;
+        }
+
+        .sidebar-section {
+            margin-bottom: 32px;
+        }
+
+        .sidebar-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #e0e0e0;
+        }
+
+        .flag {
+            margin-bottom: 12px;
+            padding: 12px;
+            border-left: 2px solid #222;
+            font-size: 12px;
+        }
+
+        .flag.blocker {
+            border-left-color: #d9534f;
+            background: rgba(217, 83, 79, 0.05);
+        }
+
+        .flag.risk {
+            border-left-color: #f0ad4e;
+            background: rgba(240, 173, 78, 0.05);
+        }
+
+        .flag.note {
+            border-left-color: #5bc0de;
+            background: rgba(91, 192, 222, 0.05);
+        }
+
+        .flag-label {
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 10px;
+            letter-spacing: 0.3px;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .flag.blocker .flag-label {
+            color: #d9534f;
+        }
+
+        .flag.risk .flag-label {
+            color: #f0ad4e;
+        }
+
+        .flag.note .flag-label {
+            color: #5bc0de;
+        }
+
+        .flag-text {
+            color: #e0e0e0;
+            line-height: 1.5;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                border-left: none;
+                border-top: 1px solid #222;
+                padding-left: 0;
+                padding-top: 20px;
+            }
+
+            .counters {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .title {
+                font-size: 36px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 20px 16px;
+            }
+
+            .counters {
+                grid-template-columns: 1fr;
+            }
+
+            .title {
+                font-size: 28px;
+            }
+
+            .phase-bar {
+                font-size: 10px;
+            }
+
+            .counter-value {
+                font-size: 32px;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                color: #000;
+            }
+
+            .counter-card, .phase-bar-container, .milestone, .action-item {
+                border-color: #ccc;
+                background: white !important;
+            }
+
+            .section-title, .phase-name {
+                color: #000;
+            }
+
+            .counter-value, .phase-bar {
+                color: #8b7355;
+            }
+
+            .milestone-marker, .action-checkbox {
+                border-color: #999;
+            }
+
+            .milestone.completed .milestone-marker,
+            .action-item.checked .action-checkbox {
+                background: #999;
+            }
+
+            .phase-bar {
+                background: #ddd !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">The Hour Glass × Patek Philippe</h1>
+            <p class="subtitle">9 boutique websites · March–May 2026</p>
+        </div>
+
+        <div class="counters">
+            <div class="counter-card">
+                <div class="counter-label">Days Until Michael Tay Presentation</div>
+                <div class="counter-value" id="daysUntilPresentation">—</div>
+                <div class="counter-text" id="presentationDate">March 20, 2026</div>
+            </div>
+            <div class="counter-card">
+                <div class="counter-label">Days Until Launch</div>
+                <div class="counter-value" id="daysUntilLaunch">—</div>
+                <div class="counter-text" id="launchDate">May 31, 2026</div>
+            </div>
+            <div class="counter-card">
+                <div class="counter-label">Project Duration</div>
+                <div class="counter-value" id="totalDays">—</div>
+                <div class="counter-text">80 days total</div>
+            </div>
+            <div class="counter-card">
+                <div class="counter-label">Action Items Completed</div>
+                <div class="counter-value" id="completedCount">0</div>
+                <div class="counter-text" id="completedText">of 10 items</div>
+            </div>
+        </div>
+
+        <div class="main-grid">
+            <div>
+                <!-- Timeline Section -->
+                <div class="timeline-section">
+                    <h2 class="section-title">Project Timeline</h2>
+
+                    <div class="timeline-phases">
+                        <div class="phase">
+                            <div class="phase-header">
+                                <span class="phase-name">Kickoff & Immersion</span>
+                                <span class="phase-dates">Mar 13–17</span>
+                            </div>
+                            <div class="phase-bar-container">
+                                <div class="phase-bar completed" style="width: 10%;">Complete</div>
+                            </div>
+                        </div>
+
+                        <div class="phase">
+                            <div class="phase-header">
+                                <span class="phase-name">Pre-Review & Approval Gate</span>
+                                <span class="phase-dates">Mar 18–20</span>
+                            </div>
+                            <div class="phase-bar-container">
+                                <div class="phase-bar in-progress" style="width: 20%;">In Progress</div>
+                            </div>
+                        </div>
+
+                        <div class="phase">
+                            <div class="phase-header">
+                                <span class="phase-name">Design Phase</span>
+                                <span class="phase-dates">Mar 20 – Apr 15</span>
+                            </div>
+                            <div class="phase-bar-container">
+                                <div class="phase-bar" style="width: 35%; background: linear-gradient(90deg, rgba(201, 168, 76, 0.3) 0%, rgba(201, 168, 76, 0.1) 100%);"></div>
+                            </div>
+                        </div>
+
+                        <div class="phase">
+                            <div class="phase-header">
+                                <span class="phase-name">Development</span>
+                                <span class="phase-dates">Apr 1 – May 15</span>
+                            </div>
+                            <div class="phase-bar-container">
+                                <div class="phase-bar" style="width: 45%; background: linear-gradient(90deg, rgba(201, 168, 76, 0.3) 0%, rgba(201, 168, 76, 0.1) 100%);"></div>
+                            </div>
+                        </div>
+
+                        <div class="phase">
+                            <div class="phase-header">
+                                <span class="phase-name">QA & Launch</span>
+                                <span class="phase-dates">May 15–31</span>
+                            </div>
+                            <div class="phase-bar-container">
+                                <div class="phase-bar" style="width: 20%; background: linear-gradient(90deg, rgba(201, 168, 76, 0.2) 0%, rgba(201, 168, 76, 0.05) 100%);"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Milestones Section -->
+                <div class="timeline-section">
+                    <h2 class="section-title">Critical Milestones</h2>
+
+                    <div class="milestones">
+                        <div class="milestone completed">
+                            <div class="milestone-marker"></div>
+                            <div class="milestone-content">
+                                <div class="milestone-date">March 13, 2026</div>
+                                <div class="milestone-text">Project kickoff (briefing call)</div>
+                            </div>
+                        </div>
+
+                        <div class="milestone">
+                            <div class="milestone-marker"></div>
+                            <div class="milestone-content">
+                                <div class="milestone-date">March 14–16, 2026</div>
+                                <div class="milestone-text">Boutique immersion visits (SG Takashimaya + KL TRX)</div>
+                            </div>
+                        </div>
+
+                        <div class="milestone">
+                            <div class="milestone-marker"></div>
+                            <div class="milestone-content">
+                                <div class="milestone-date">March 16–17, 2026</div>
+                                <div class="milestone-text">Pre-review meeting with Eugene's boss</div>
+                            </div>
+                        </div>
+
+                        <div class="milestone">
+                            <div class="milestone-marker"></div>
+                            <div class="milestone-content">
+                                <div class="milestone-date">March 18, 2026</div>
+                                <div class="milestone-text">Submit pricing to Eugene</div>
+                            </div>
+                        </div>
+
+                        <div class="milestone key-gate">
+                            <div class="milestone-marker"></div>
+                            <div class="milestone-content">
+                                <div class="milestone-date">March 20, 2026</div>
+                                <div class="milestone-text">Present to Michael Tay</div>
+                                <div class="key-gate-label">← Key Gate</div>
+                            </div>
+                        </div>
+
+                        <div class="milestone">
+                            <div class="milestone-marker"></div>
+                            <div class="milestone-content">
+                                <div class="milestone-date">March 20 – April 15, 2026</div>
+                                <div class="milestone-text">Design phase (Figma, revisions, Patek approval)</div>
+                            </div>
+                        </div>
+
+                        <div class="milestone">
+                            <div class="milestone-marker"></div>
+                            <div class="milestone-content">
+                                <div class="milestone-date">April 1 – May 15, 2026</div>
+                                <div class="milestone-text">Development (overlaps with design)</div>
+                            </div>
+                        </div>
+
+                        <div class="milestone">
+                            <div class="milestone-marker"></div>
+                            <div class="milestone-content">
+                                <div class="milestone-date">May 15–31, 2026</div>
+                                <div class="milestone-text">QA + Launch preparation</div>
+                            </div>
+                        </div>
+
+                        <div class="milestone">
+                            <div class="milestone-marker"></div>
+                            <div class="milestone-content">
+                                <div class="milestone-date">May 31, 2026</div>
+                                <div class="milestone-text">GO LIVE</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Items Section -->
+                <div class="timeline-section">
+                    <h2 class="section-title">Action Items</h2>
+
+                    <div class="action-items">
+                        <div class="action-item due-today" data-id="1">
+                            <div class="action-checkbox" onclick="toggleAction(1)"></div>
+                            <div class="action-content">
+                                <div class="action-text">Confirm Mar 20 date with Eugene</div>
+                                <div class="action-meta">
+                                    <span class="action-owner">Owner: Erik</span>
+                                    <span class="action-due today">Due: TODAY</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="action-item due-today" data-id="2">
+                            <div class="action-checkbox" onclick="toggleAction(2)"></div>
+                            <div class="action-content">
+                                <div class="action-text">Send boutique visit preferences (date/time/location)</div>
+                                <div class="action-meta">
+                                    <span class="action-owner">Owner: Erik / Gael / PWA</span>
+                                    <span class="action-due today">Due: TODAY</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="action-item due-today" data-id="3">
+                            <div class="action-checkbox" onclick="toggleAction(3)"></div>
+                            <div class="action-content">
+                                <div class="action-text">Create WhatsApp group + share luxury credentials</div>
+                                <div class="action-meta">
+                                    <span class="action-owner">Owner: Erik</span>
+                                    <span class="action-due today">Due: TODAY</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="action-item" data-id="4">
+                            <div class="action-checkbox" onclick="toggleAction(4)"></div>
+                            <div class="action-content">
+                                <div class="action-text">Eugene provides PPE DAM access</div>
+                                <div class="action-meta">
+                                    <span class="action-owner">Owner: Eugene</span>
+                                    <span class="action-due">Due: ASAP</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="action-item" data-id="5">
+                            <div class="action-checkbox" onclick="toggleAction(5)"></div>
+                            <div class="action-content">
+                                <div class="action-text">Eugene arranges boutique visits</div>
+                                <div class="action-meta">
+                                    <span class="action-owner">Owner: Eugene</span>
+                                    <span class="action-due">Due: Next week</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="action-item" data-id="6">
+                            <div class="action-checkbox" onclick="toggleAction(6)"></div>
+                            <div class="action-content">
+                                <div class="action-text">Pre-review meeting with Eugene's boss</div>
+                                <div class="action-meta">
+                                    <span class="action-owner">Owner: Erik / Gael</span>
+                                    <span class="action-due">Due: W/C Mar 16</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="action-item" data-id="7">
+                            <div class="action-checkbox" onclick="toggleAction(7)"></div>
+                            <div class="action-content">
+                                <div class="action-text">Submit pricing to Eugene</div>
+                                <div class="action-meta">
+                                    <span class="action-owner">Owner: Erik / Gael</span>
+                                    <span class="action-due">Due: Before Mar 20</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="action-item" data-id="8">
+                            <div class="action-checkbox" onclick="toggleAction(8)"></div>
+                            <div class="action-content">
+                                <div class="action-text">Prepare strategy deck</div>
+                                <div class="action-meta">
+                                    <span class="action-owner">Owner: AKQA team</span>
+                                    <span class="action-due">Due: Mar 20</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="action-item" data-id="9">
+                            <div class="action-checkbox" onclick="toggleAction(9)"></div>
+                            <div class="action-content">
+                                <div class="action-text">Build working prototype</div>
+                                <div class="action-meta">
+                                    <span class="action-owner">Owner: Engineering</span>
+                                    <span class="action-due">Due: Mar 20</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="action-item" data-id="10">
+                            <div class="action-checkbox" onclick="toggleAction(10)"></div>
+                            <div class="action-content">
+                                <div class="action-text">Present to Michael Tay</div>
+                                <div class="action-meta">
+                                    <span class="action-owner">Owner: Erik / Gael</span>
+                                    <span class="action-due">Due: Mar 20</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Dependency Flags</h3>
+
+                    <div class="flag blocker">
+                        <span class="flag-label">Blocker</span>
+                        <div class="flag-text">Cannot start design without PPE DAM assets</div>
+                    </div>
+
+                    <div class="flag blocker">
+                        <span class="flag-label">Blocker</span>
+                        <div class="flag-text">Cannot start design without Patek brand guidelines</div>
+                    </div>
+
+                    <div class="flag risk">
+                        <span class="flag-label">Risk</span>
+                        <div class="flag-text">May 31 launch is aggressive — 11 weeks total, design-to-launch in ~9 weeks</div>
+                    </div>
+
+                    <div class="flag risk">
+                        <span class="flag-label">Risk</span>
+                        <div class="flag-text">Patek brand approval cycle could introduce delays</div>
+                    </div>
+
+                    <div class="flag note">
+                        <span class="flag-label">Note</span>
+                        <div class="flag-text">Budget flexible IF Michael Tay approves vision</div>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Project Stats</h3>
+                    <div style="font-size: 12px; color: #e0e0e0; line-height: 1.8;">
+                        <div><strong>Total Duration:</strong> 80 days</div>
+                        <div><strong>Design Phase:</strong> 27 days</div>
+                        <div><strong>Dev Phase:</strong> 45 days</div>
+                        <div><strong>QA Phase:</strong> 17 days</div>
+                        <div><strong>Overlap:</strong> 23 days</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // State management (session-based, not persisted)
+        const actionState = {};
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCounters();
+
+            // Initialize all checkboxes
+            for (let i = 1; i <= 10; i++) {
+                actionState[i] = false;
+            }
+        });
+
+        // Toggle action item
+        function toggleAction(id) {
+            actionState[id] = !actionState[id];
+            updateActionItem(id);
+            updateCounters();
+        }
+
+        // Update individual action item UI
+        function updateActionItem(id) {
+            const item = document.querySelector(`[data-id="${id}"]`);
+            const checkbox = item.querySelector('.action-checkbox');
+
+            if (actionState[id]) {
+                item.classList.add('checked');
+            } else {
+                item.classList.remove('checked');
+            }
+        }
+
+        // Calculate and update all counters
+        function updateCounters() {
+            const today = new Date('2026-03-13');
+            const presentationDate = new Date('2026-03-20');
+            const launchDate = new Date('2026-05-31');
+            const startDate = new Date('2026-03-13');
+
+            // Calculate days
+            const daysUntilPresentation = Math.ceil((presentationDate - today) / (1000 * 60 * 60 * 24));
+            const daysUntilLaunch = Math.ceil((launchDate - today) / (1000 * 60 * 60 * 24));
+            const totalDays = Math.ceil((launchDate - startDate) / (1000 * 60 * 60 * 24));
+
+            // Update counters
+            document.getElementById('daysUntilPresentation').textContent = daysUntilPresentation;
+            document.getElementById('daysUntilLaunch').textContent = daysUntilLaunch;
+            document.getElementById('totalDays').textContent = totalDays;
+
+            // Count completed actions
+            const completed = Object.values(actionState).filter(v => v === true).length;
+            document.getElementById('completedCount').textContent = completed;
+            document.getElementById('completedText').textContent = `of 10 items`;
+
+            // Add visual indicator for presentation countdown
+            const presentationCounter = document.querySelector('[id="daysUntilPresentation"]').parentElement;
+            if (daysUntilPresentation <= 7 && daysUntilPresentation > 0) {
+                presentationCounter.style.color = '#f0ad4e';
+            } else if (daysUntilPresentation === 0) {
+                presentationCounter.style.color = '#d9534f';
+            }
+        }
+
+        // Allow keyboard interaction for accessibility
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && e.target.classList.contains('action-checkbox')) {
+                const id = e.target.closest('.action-item').dataset.id;
+                toggleAction(parseInt(id));
+            }
+        });
+
+        // Make checkboxes keyboard accessible
+        document.querySelectorAll('.action-checkbox').forEach((checkbox, index) => {
+            checkbox.setAttribute('tabindex', '0');
+            checkbox.setAttribute('role', 'checkbox');
+            checkbox.addEventListener('keydown', function(e) {
+                if (e.key === ' ' || e.key === 'Enter') {
+                    e.preventDefault();
+                    const id = this.closest('.action-item').dataset.id;
+                    toggleAction(parseInt(id));
+                }
+            });
+        });
+    </script>
+</body>
+</html>

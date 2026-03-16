@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Hour Glass — Conversation Flow</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0a0a; color: #e0e0e0; font-family: 'Georgia', serif; padding: 48px; min-height: 100vh; }
+  h1 { font-size: 14px; letter-spacing: 3px; text-transform: uppercase; color: #888; margin-bottom: 48px; font-weight: 400; }
+  .timeline { position: relative; max-width: 800px; margin: 0 auto; }
+  .timeline::before { content: ''; position: absolute; left: 24px; top: 0; bottom: 0; width: 1px; background: #333; }
+  .event { position: relative; padding-left: 64px; margin-bottom: 40px; }
+  .event::before { content: ''; position: absolute; left: 18px; top: 6px; width: 13px; height: 13px; border-radius: 50%; border: 1px solid #555; background: #0a0a0a; }
+  .event.active::before { background: #c9a84c; border-color: #c9a84c; box-shadow: 0 0 12px rgba(201,168,76,0.4); }
+  .event.future::before { background: transparent; border: 1px dashed #555; }
+  .date { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #777; margin-bottom: 4px; font-family: 'Helvetica Neue', sans-serif; }
+  .event.active .date { color: #c9a84c; }
+  .title { font-size: 18px; color: #fff; margin-bottom: 6px; font-weight: 400; }
+  .detail { font-size: 13px; color: #999; line-height: 1.6; font-family: 'Helvetica Neue', sans-serif; }
+  .detail strong { color: #ccc; font-weight: 500; }
+  .tag { display: inline-block; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; padding: 3px 10px; border: 1px solid #333; border-radius: 2px; margin-top: 8px; color: #888; font-family: 'Helvetica Neue', sans-serif; }
+  .tag.inbound { border-color: #2a5a3a; color: #5aad6a; }
+  .tag.internal { border-color: #3a3a5a; color: #7a7acd; }
+  .tag.outbound { border-color: #5a4a2a; color: #c9a84c; }
+  .tag.live { border-color: #8b2020; color: #e05050; animation: pulse 2s infinite; }
+  .tag.next { border-color: #333; color: #666; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+  .deliverables { display: flex; gap: 16px; margin-top: 16px; flex-wrap: wrap; }
+  .deliverable { background: #111; border: 1px solid #222; padding: 16px 20px; flex: 1; min-width: 200px; }
+  .deliverable h3 { font-size: 13px; color: #c9a84c; font-weight: 400; margin-bottom: 4px; letter-spacing: 1px; text-transform: uppercase; font-family: 'Helvetica Neue', sans-serif; }
+  .deliverable p { font-size: 12px; color: #777; line-height: 1.5; font-family: 'Helvetica Neue', sans-serif; }
+  .people { margin-top: 48px; padding-top: 32px; border-top: 1px solid #1a1a1a; }
+  .people h2 { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #555; margin-bottom: 20px; font-weight: 400; font-family: 'Helvetica Neue', sans-serif; }
+  .person-grid { display: flex; gap: 24px; flex-wrap: wrap; }
+  .person { background: #111; border: 1px solid #1a1a1a; padding: 16px 20px; min-width: 180px; }
+  .person .name { font-size: 15px; color: #ddd; margin-bottom: 2px; }
+  .person .role { font-size: 11px; color: #666; font-family: 'Helvetica Neue', sans-serif; line-height: 1.4; }
+</style>
+</head>
+<body>
+
+<h1>The Hour Glass &times; AKQA / Aleph &mdash; Engagement Timeline</h1>
+
+<div class="timeline">
+
+  <div class="event">
+    <div class="date">24 February 2026</div>
+    <div class="title">Inbound Enquiry</div>
+    <div class="detail">Eugene Fung emails <strong>hello@akqa.com</strong> — The Hour Glass looking to enhance website UI/UX, found AKQA's portfolio.</div>
+    <span class="tag inbound">Inbound</span>
+  </div>
+
+  <div class="event">
+    <div class="date">24 February 2026</div>
+    <div class="title">Erik Responds &amp; Routes Internally</div>
+    <div class="detail">Erik replies to Eugene proposing a call. Separately forwards to <strong>Gael</strong> (MD, MY), <strong>Roy</strong>, <strong>Aman</strong>, and Quotes MY — flags as Studio lead, asks team to drive forward.</div>
+    <span class="tag outbound">Outbound</span>
+    <span class="tag internal">Internal</span>
+  </div>
+
+  <div class="event">
+    <div class="date">~27 February 2026</div>
+    <div class="title">Intro Call</div>
+    <div class="detail">First call between Erik and Eugene. Discovery conversation — Eugene outlines The Hour Glass's digital ambitions.</div>
+    <span class="tag outbound">Discovery</span>
+  </div>
+
+  <div class="event">
+    <div class="date">2 March 2026</div>
+    <div class="title">Erik Follows Up</div>
+    <div class="detail">Erik proposes meeting Eugene's colleague face-to-face in Singapore. Adds <strong>Justin Foo</strong> to thread.</div>
+    <span class="tag outbound">Outbound</span>
+  </div>
+
+  <div class="event">
+    <div class="date">3 March 2026</div>
+    <div class="title">Gael Flags SG Visit</div>
+    <div class="detail">Gael may visit Singapore Friday — wants 45 min with Erik.</div>
+    <span class="tag internal">Internal</span>
+  </div>
+
+  <div class="event">
+    <div class="date">12 March 2026</div>
+    <div class="title">Eugene Requests Briefing Call</div>
+    <div class="detail">"I'd like to share a brief with you guys for <strong>the sites we're planning to build</strong>." Requests 45 min at 10am tomorrow.</div>
+    <span class="tag inbound">Inbound</span>
+  </div>
+
+  <div class="event active">
+    <div class="date">13 March 2026 &mdash; 10:00 SGT</div>
+    <div class="title">Project Briefing Call</div>
+    <div class="detail">Eugene briefs Erik + Gael on the project. Expect: scope of "sites" (plural), requirements, timeline expectations, budget signals.</div>
+    <span class="tag live">Today</span>
+  </div>
+
+  <div class="event future">
+    <div class="date">Post-Call</div>
+    <div class="title">Deliverables</div>
+    <div class="detail">Erik shares call notes + Eugene's brief document. Three artifacts to produce:</div>
+    <div class="deliverables">
+      <div class="deliverable">
+        <h3>Creative Brief</h3>
+        <p>Internal, sharp, detailed. For the creative team. Distills client vision into actionable direction.</p>
+      </div>
+      <div class="deliverable">
+        <h3>Proposal &amp; SOW</h3>
+        <p>High-level commercial proposal. Scope, approach, phases, pricing framework, terms.</p>
+      </div>
+      <div class="deliverable">
+        <h3>Timeline Tracker</h3>
+        <p>Key milestones, dependencies, decision gates. Kept current throughout engagement.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="people">
+  <h2>Key People</h2>
+  <div class="person-grid">
+    <div class="person">
+      <div class="name">Eugene Fung</div>
+      <div class="role">Group Digital Marketing Manager<br/>The Hour Glass (KL)</div>
+    </div>
+    <div class="person">
+      <div class="name">Erik Posthuma</div>
+      <div class="role">CGO, APAC<br/>AKQA / Aleph Labs (SG)</div>
+    </div>
+    <div class="person">
+      <div class="name">Gael Oliveres</div>
+      <div class="role">Managing Director<br/>Aleph Labs (MY)</div>
+    </div>
+    <div class="person">
+      <div class="name">Justin Foo</div>
+      <div class="role">Aleph Labs (SG)</div>
+    </div>
+    <div class="person">
+      <div class="name">Roy Vimalan</div>
+      <div class="role">Aleph Labs</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
