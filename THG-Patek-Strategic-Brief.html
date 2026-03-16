@@ -719,8 +719,16 @@
     color: var(--muted);
     margin-bottom: 16px;
   }
+  .cs-content {
+    overflow-y: auto;
+    max-height: 100%;
+    padding-right: 8px;
+  }
+  .cs-content::-webkit-scrollbar { width: 3px; }
+  .cs-content::-webkit-scrollbar-track { background: transparent; }
+  .cs-content::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 2px; }
   .cs-content h1 {
-    font-size: clamp(28px, 3.5vw, 48px);
+    font-size: clamp(26px, 3vw, 44px);
     margin-bottom: 6px;
   }
   .cs-content h2 {
@@ -732,7 +740,7 @@
     margin-bottom: 20px;
     font-style: normal;
   }
-  .cs-content p { font-size: 15px; line-height: 1.6; margin-bottom: 12px; }
+  .cs-content p { font-size: 14px; line-height: 1.65; margin-bottom: 12px; }
   .cs-image {
     height: 100%;
     background: var(--bg-warm);
@@ -1098,12 +1106,15 @@
           <div class="cs-panel">
             <div class="cs-content">
               <div class="cs-brand">Hermès</div>
-              <h1>The weight of silence</h1>
-              <h2>Digital flagship · Hermès International</h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi aliquip.</p>
-              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+              <h1>La Maison Des Carrés</h1>
+              <h2>A store like no other.</h2>
+              <p>An icon of French luxury fashion, Hermès silk is unique in its fantasy and playfulness. To house this vibrantly creative world, the conventional e-commerce experience needed to be reimagined – moving beyond purchase to a total immersion in the artistry of the brand. An approach free enough to combine the artistry and craftsmanship of La Maison des Carrés with the pragmatism of a clear and intuitive e-commerce presentation of more than 600 products.</p>
+              <p>Always welcoming and informative, perfect customer service combines with delightful surprises unrestrained by the real world. Entirely illustrated yet fully responsive, the ever-changing Maison des Carrés is available on any device and open in 27 countries across Europe, Asia and America.</p>
+              <p>The worldwide coverage includes articles in Elle, Vogue, Creative Review, New York Post, WWD Japan, Le Figaro and Creativity.</p>
             </div>
-            <div class="cs-image"><span>Visual coming</span></div>
+            <div class="cs-image">
+              <img src="images/hermes-maison.jpg" alt="La Maison Des Carrés — Hermès" style="width:100%;height:100%;object-fit:cover;display:block;">
+            </div>
           </div>
 
           <!-- Panel 2: Montblanc -->
