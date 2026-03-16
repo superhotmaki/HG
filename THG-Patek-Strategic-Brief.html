@@ -707,7 +707,7 @@
     grid-template-columns: 1fr 1fr;
     gap: 64px;
     align-items: center;
-    padding: 0 100px;
+    padding: 0 100px 0 80px;
     box-sizing: border-box;
   }
   .cs-brand {
@@ -777,7 +777,7 @@
   .cs-arrow:hover { border-color: var(--black); color: var(--black); }
   .cs-arrow:disabled { opacity: 0.2; pointer-events: none; }
   .cs-arrow-prev { left: 32px; }
-  .cs-arrow-next { right: 32px; }
+  .cs-arrow-next { right: 64px; } /* clear the fixed dot-nav at right:28px */
   .cs-dots {
     flex-shrink: 0;
     display: flex;
