@@ -671,6 +671,115 @@
     .topbar-link { padding: 0 12px; }
   }
 
+  /* ─── CASE STUDY CAROUSEL ─── */
+  .carousel-slide .slide-inner {
+    max-width: none;
+    width: 100%;
+    padding: 0;
+    position: relative;
+  }
+  .cs-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .carousel-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+  .cs-track {
+    display: flex;
+    transition: transform 0.55s cubic-bezier(0.77, 0, 0.175, 1);
+  }
+  .cs-panel {
+    flex: 0 0 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    padding: 0 100px;
+    box-sizing: border-box;
+  }
+  .cs-brand {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+  .cs-content h1 {
+    font-size: clamp(32px, 4vw, 52px);
+    margin-bottom: 8px;
+  }
+  .cs-content h2 {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--muted);
+    letter-spacing: -0.01em;
+    margin-bottom: 28px;
+    font-style: normal;
+  }
+  .cs-content p { font-size: 16px; line-height: 1.65; }
+  .cs-image {
+    aspect-ratio: 4/5;
+    background: var(--bg-warm);
+    border: 1px solid var(--rule);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cs-image span {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .cs-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: 1px solid var(--rule);
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: border-color 0.2s, opacity 0.2s;
+    color: var(--body);
+    font-size: 16px;
+    font-family: var(--sans);
+  }
+  .cs-arrow:hover { border-color: var(--black); color: var(--black); }
+  .cs-arrow:disabled { opacity: 0.2; pointer-events: none; }
+  .cs-arrow-prev { left: 32px; }
+  .cs-arrow-next { right: 32px; }
+  .cs-dots {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 40px;
+  }
+  .cs-dot {
+    width: 6px;
+    height: 6px;
+    border: 1px solid var(--muted);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .cs-dot.active { background: var(--black); border-color: var(--black); }
+  @media (max-width: 700px) {
+    .cs-panel { grid-template-columns: 1fr; gap: 32px; padding: 0 24px; }
+    .cs-image { aspect-ratio: 16/9; }
+  }
+
   /* ─── PRINT ─── */
   @media print {
     html, body { overflow: visible; height: auto; }
@@ -962,6 +1071,64 @@
     <div class="slide-num"></div>
   </div>
 
+  <!-- CASE STUDIES CAROUSEL -->
+  <div class="slide carousel-slide" data-section="response" id="caseStudiesSlide">
+    <div class="slide-inner">
+      <div class="cs-header">
+        <div class="section-label">Our Work</div>
+      </div>
+      <div class="carousel-wrapper">
+        <button class="cs-arrow cs-arrow-prev" id="csPrev" disabled aria-label="Previous">←</button>
+        <button class="cs-arrow cs-arrow-next" id="csNext" aria-label="Next">→</button>
+        <div class="cs-track" id="csTrack">
+
+          <!-- Panel 1: Hermès -->
+          <div class="cs-panel">
+            <div class="cs-content">
+              <div class="cs-brand">Hermès</div>
+              <h1>The weight of silence</h1>
+              <h2>Digital flagship · Hermès International</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi aliquip.</p>
+              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+            </div>
+            <div class="cs-image"><span>Visual coming</span></div>
+          </div>
+
+          <!-- Panel 2: Montblanc -->
+          <div class="cs-panel">
+            <div class="cs-content">
+              <div class="cs-brand">Montblanc</div>
+              <h1>The art of writing</h1>
+              <h2>E-commerce experience · Montblanc International</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi aliquip.</p>
+              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+            </div>
+            <div class="cs-image"><span>Visual coming</span></div>
+          </div>
+
+          <!-- Panel 3: Bvlgari -->
+          <div class="cs-panel">
+            <div class="cs-content">
+              <div class="cs-brand">Bvlgari</div>
+              <h1>Bold Roman heritage</h1>
+              <h2>Brand platform · Bvlgari SpA</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi aliquip.</p>
+              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+            </div>
+            <div class="cs-image"><span>Visual coming</span></div>
+          </div>
+
+        </div><!-- /cs-track -->
+      </div><!-- /carousel-wrapper -->
+      <div class="cs-dots" id="csDots">
+        <div class="cs-dot active"></div>
+        <div class="cs-dot"></div>
+        <div class="cs-dot"></div>
+      </div>
+    </div>
+    <div class="slide-num"></div>
+  </div>
+
   <!-- ───── TIMELINE SLIDES ───── -->
 
   <!-- 10. TIMELINE OVERVIEW -->
@@ -1155,8 +1322,38 @@ const obs = new IntersectionObserver(entries => {
 }, { root: deck, threshold: 0.55 });
 slides.forEach(s => obs.observe(s));
 
+// ── Carousel ──
+let csIndex = 0;
+const CS_TOTAL = 3;
+
+function updateCarousel() {
+  document.getElementById('csTrack').style.transform = `translateX(-${csIndex * 100}%)`;
+  document.getElementById('csPrev').disabled = csIndex === 0;
+  document.getElementById('csNext').disabled = csIndex === CS_TOTAL - 1;
+  document.querySelectorAll('.cs-dot').forEach((d, i) => d.classList.toggle('active', i === csIndex));
+}
+
+document.getElementById('csPrev').addEventListener('click', () => { if (csIndex > 0) { csIndex--; updateCarousel(); } });
+document.getElementById('csNext').addEventListener('click', () => { if (csIndex < CS_TOTAL - 1) { csIndex++; updateCarousel(); } });
+document.querySelectorAll('.cs-dot').forEach((dot, i) => { dot.addEventListener('click', () => { csIndex = i; updateCarousel(); }); });
+
 // Keyboard
 document.addEventListener('keydown', e => {
+  const onCarousel = visibleSlides[currentSlide] && visibleSlides[currentSlide].id === 'caseStudiesSlide';
+
+  // On carousel slide: left/right navigate panels first, overflow to deck
+  if (onCarousel && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
+    e.preventDefault();
+    if (e.key === 'ArrowRight') {
+      if (csIndex < CS_TOTAL - 1) { csIndex++; updateCarousel(); }
+      else if (currentSlide < visibleSlides.length - 1) visibleSlides[currentSlide + 1].scrollIntoView({ behavior: 'smooth' });
+    } else {
+      if (csIndex > 0) { csIndex--; updateCarousel(); }
+      else if (currentSlide > 0) visibleSlides[currentSlide - 1].scrollIntoView({ behavior: 'smooth' });
+    }
+    return;
+  }
+
   if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') {
     e.preventDefault();
     if (currentSlide < visibleSlides.length - 1) visibleSlides[currentSlide + 1].scrollIntoView({ behavior: 'smooth' });
