@@ -794,6 +794,62 @@
     transition: all 0.2s;
   }
   .cs-dot.active { background: var(--black); border-color: var(--black); }
+
+  /* ─── CAROUSEL ENTRANCE ANIMATIONS ─── */
+  @keyframes csSlideUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes csFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes csReveal {
+    from { clip-path: inset(0 0 100% 0); }
+    to   { clip-path: inset(0 0 0% 0); }
+  }
+
+  /* Header + nav: invisible until slide enters viewport */
+  .cs-header { opacity: 0; }
+  .cs-nav    { opacity: 0; }
+  .carousel-slide.cs-entered .cs-header {
+    animation: csFadeIn 1s cubic-bezier(0.4, 0, 0.2, 1) 0.1s forwards;
+  }
+  .carousel-slide.cs-entered .cs-nav {
+    animation: csFadeIn 0.9s cubic-bezier(0.4, 0, 0.2, 1) 1s forwards;
+  }
+
+  /* Panel content: invisible until panel is activated */
+  .cs-panel .cs-brand,
+  .cs-panel .cs-content h1,
+  .cs-panel .cs-content h2,
+  .cs-panel .cs-content p,
+  .cs-panel .cs-image { opacity: 0; }
+
+  /* Staggered entrance when panel becomes active */
+  .cs-panel.cs-active .cs-brand {
+    animation: csSlideUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s forwards;
+  }
+  .cs-panel.cs-active .cs-content h1 {
+    animation: csSlideUp 1.1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s forwards;
+  }
+  .cs-panel.cs-active .cs-content h2 {
+    animation: csSlideUp 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.38s forwards;
+  }
+  .cs-panel.cs-active .cs-content p:nth-of-type(1) {
+    animation: csSlideUp 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.52s forwards;
+  }
+  .cs-panel.cs-active .cs-content p:nth-of-type(2) {
+    animation: csSlideUp 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.64s forwards;
+  }
+  .cs-panel.cs-active .cs-content p:nth-of-type(3) {
+    animation: csSlideUp 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.74s forwards;
+  }
+  /* Image: curtain-lift reveal */
+  .cs-panel.cs-active .cs-image {
+    animation: csReveal 1.4s cubic-bezier(0.77, 0, 0.175, 1) 0s forwards;
+  }
+
   @media (max-width: 700px) {
     .carousel-slide { padding: 72px 0 24px; }
     .cs-panel { grid-template-columns: 1fr; gap: 24px; padding: 0 24px; }
@@ -1350,13 +1406,40 @@ slides.forEach(s => obs.observe(s));
 // ── Carousel ──
 let csIndex = 0;
 const CS_TOTAL = 3;
+const csPanels = document.querySelectorAll('.cs-panel');
+
+function activatePanel(index) {
+  csPanels.forEach((p, i) => {
+    if (i === index) {
+      // Remove then re-add to restart animation even on revisit
+      p.classList.remove('cs-active');
+      void p.offsetWidth; // force reflow
+      p.classList.add('cs-active');
+    } else {
+      p.classList.remove('cs-active');
+    }
+  });
+}
 
 function updateCarousel() {
   document.getElementById('csTrack').style.transform = `translateX(-${csIndex * 100}%)`;
   document.getElementById('csPrev').disabled = csIndex === 0;
   document.getElementById('csNext').disabled = csIndex === CS_TOTAL - 1;
   document.querySelectorAll('.cs-dot').forEach((d, i) => d.classList.toggle('active', i === csIndex));
+  activatePanel(csIndex);
 }
+
+// Entrance: trigger animations when slide first scrolls into view
+const caseStudiesSlide = document.getElementById('caseStudiesSlide');
+const csEntranceObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting && !caseStudiesSlide.classList.contains('cs-entered')) {
+      caseStudiesSlide.classList.add('cs-entered');
+      activatePanel(csIndex);
+    }
+  });
+}, { root: deck, threshold: 0.5 });
+csEntranceObs.observe(caseStudiesSlide);
 
 document.getElementById('csPrev').addEventListener('click', () => { if (csIndex > 0) { csIndex--; updateCarousel(); } });
 document.getElementById('csNext').addEventListener('click', () => { if (csIndex < CS_TOTAL - 1) { csIndex++; updateCarousel(); } });
