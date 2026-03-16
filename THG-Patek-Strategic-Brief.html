@@ -757,33 +757,33 @@
     color: var(--muted);
   }
   .cs-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
     background: none;
     border: 1px solid var(--rule);
-    width: 44px;
-    height: 44px;
+    width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    z-index: 10;
+    flex-shrink: 0;
     transition: border-color 0.2s, opacity 0.2s;
     color: var(--body);
-    font-size: 16px;
+    font-size: 14px;
     font-family: var(--sans);
   }
   .cs-arrow:hover { border-color: var(--black); color: var(--black); }
   .cs-arrow:disabled { opacity: 0.2; pointer-events: none; }
-  .cs-arrow-prev { left: 32px; }
-  .cs-arrow-next { right: 64px; } /* clear the fixed dot-nav at right:28px */
-  .cs-dots {
+  .cs-nav {
     flex-shrink: 0;
     display: flex;
-    gap: 8px;
+    align-items: center;
     justify-content: center;
+    gap: 20px;
     margin-top: 16px;
+  }
+  .cs-dots {
+    display: flex;
+    gap: 8px;
   }
   .cs-dot {
     width: 6px;
@@ -1098,8 +1098,6 @@
         <div class="section-label">Our Work</div>
       </div>
       <div class="carousel-wrapper">
-        <button class="cs-arrow cs-arrow-prev" id="csPrev" disabled aria-label="Previous">←</button>
-        <button class="cs-arrow cs-arrow-next" id="csNext" aria-label="Next">→</button>
         <div class="cs-track" id="csTrack">
 
           <!-- Panel 1: Hermès -->
@@ -1143,10 +1141,14 @@
 
         </div><!-- /cs-track -->
       </div><!-- /carousel-wrapper -->
-      <div class="cs-dots" id="csDots">
-        <div class="cs-dot active"></div>
-        <div class="cs-dot"></div>
-        <div class="cs-dot"></div>
+      <div class="cs-nav">
+        <button class="cs-arrow" id="csPrev" disabled aria-label="Previous">←</button>
+        <div class="cs-dots" id="csDots">
+          <div class="cs-dot active"></div>
+          <div class="cs-dot"></div>
+          <div class="cs-dot"></div>
+        </div>
+        <button class="cs-arrow" id="csNext" aria-label="Next">→</button>
       </div>
     </div>
     <div class="slide-num"></div>
